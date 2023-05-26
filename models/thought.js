@@ -13,6 +13,7 @@ const thoughtSchema = new Schema(
       type: Date,
       default: Date.now,
       // getter method here
+      get: (date) => formatDate(date)
     },
     username: {
       type: String,
@@ -24,10 +25,18 @@ const thoughtSchema = new Schema(
   },
   {
     toJSON: {
+      virtuals: true,
       getters: true,
     },
+    id: false,
   }
 );
+
+thoughtSchema
+  .virtual('reactionCount')
+  .get(function () {
+    return this.reactions.length;
+  });
 
 const Thought = model('thought', thoughtSchema);
 
