@@ -5,6 +5,8 @@ const { User } = require('../models');
 
 router.get("/", (req, res) => {
     User.find({})
+    .populate("thoughts")
+    .populate("friends")
     .then(results => {
       res.json(results)
     })
@@ -33,6 +35,28 @@ router.put("/:id", (req, res) => {
 
 router.delete("/:id", (req, res) => {
   User.findByIdAndDelete(req.params.id)
+  .then(results => {
+    res.json(results)
+  })
+})
+
+router.post("/:userId/friends/:friendId", (req, res) => {
+  User.findByIdAndUpdate(req.params.userId, {
+    $push: {
+      friends: req.params.friendId
+    }
+  })
+  .then(results => {
+    res.json(results)
+  })
+})
+
+router.delete("/:userId/friends/:friendId", (req, res) => {
+  User.findByIdAndUpdate(req.params.userId, {
+    $pull: {
+      friends: req.params.friendId
+    }
+  })
   .then(results => {
     res.json(results)
   })
