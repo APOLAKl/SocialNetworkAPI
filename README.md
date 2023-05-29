@@ -18,7 +18,7 @@ This API uses `Express.js`, `MongoDB` for database, the `Mongoose` ODM, `Dayjs` 
 
 ## Screenshots
 
-THIS IS A WORK IN PROGRESS README and REPO
+https://github.com/APOLAKl/SocialNetworkAPI/blob/main/Assets/InsomniaSocialMediaAPI.jpg
 
 
 ## Features
